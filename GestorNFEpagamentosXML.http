@@ -1,0 +1,6 @@
+@GestorNFEpagamentosXML_HostAddress = http://localhost:5147
+
+GET {{GestorNFEpagamentosXML_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

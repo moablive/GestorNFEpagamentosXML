@@ -1,5 +1,8 @@
-﻿namespace GestorNFEpagamentosXML.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GestorNFEpagamentosXML.Models
 {
+    [Table("Evento")]
     public class eventMODEL
     {
         public int Id { get; set; }
@@ -11,18 +14,6 @@
         public string NomeVendedor { get; set; }
         public string TituloEvento { get; set; }
         public string Endereco { get; set; }
-
-        public eventMODEL(int id, string cnpj, string numeroNF, string razaoSocial, DateTimeOffset dataEmissao, DateTimeOffset dataVencimento, string nomeVendedor, string tituloEvento, string endereco)
-        {
-            Id = id;
-            CNPJ = cnpj;
-            NumeroNF = numeroNF;
-            RazaoSocial = razaoSocial;
-            DataEmissao = dataEmissao;
-            DataVencimento = dataVencimento;
-            NomeVendedor = nomeVendedor;
-            TituloEvento = tituloEvento;
-            Endereco = endereco;
-        }
+        public string Status { get; set; }
     }
 }

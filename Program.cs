@@ -21,12 +21,21 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/events", async (GestorNFEpagamentosXML.Db.DataContext context) =>
+
+//CONSULTA TOTAL
+app.MapGet("/evento", async (GestorNFEpagamentosXML.Db.DataContext context) =>
     {
         return await context.Eventos.ToListAsync();
     })
     .WithName("GetEvents")
     .WithOpenApi();
 
+//CONSULTA DE VENDEDOR
+app.MapGet("/vendedor", async (GestorNFEpagamentosXML.Db.DataContext context) =>
+    {
+        return await context.Vendedores.ToListAsync();
+    })
+    .WithName("GetVendedores")
+    .WithOpenApi();
 
 app.Run();

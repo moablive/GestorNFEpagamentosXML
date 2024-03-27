@@ -1,5 +1,10 @@
+//System
 using Microsoft.EntityFrameworkCore;
+
+//Project
 using GestorNFEpagamentosXML.Swagger;
+using GestorNFEpagamentosXML.Cors;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +18,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 // Adicionando o serviço de Controllers
 builder.Services.AddControllers();
+
+// Configuração do CORS usando a classe separada
+ConfigureCors.CorsConfiguration(builder.Services);
 
 // Configuração do Swagger
 builder.Services.ConfigureSwaggerGen();
@@ -28,6 +36,9 @@ if (app.Environment.IsDevelopment())
 
 // Redirecionamento HTTPS
 app.UseHttpsRedirection();
+
+// Uso do CORS com a política definida
+app.UseCors("localhost");
 
 // Mapeamento dos controladores
 app.MapControllers();

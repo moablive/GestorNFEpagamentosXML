@@ -3,7 +3,7 @@
 namespace GestorNFEpagamentosXML.Models
 {
     [Table("Evento")]
-    public class eventMODEL
+    public class EventMODEL
     {
         public int Id { get; set; }
         public string CNPJ { get; set; }

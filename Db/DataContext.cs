@@ -7,7 +7,7 @@ namespace GestorNFEpagamentosXML.Db
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<eventMODEL> Eventos { get; set; }
-        public DbSet<Vendedor> Vendedores { get; set; }
+        public DbSet<EventMODEL> Eventos { get; set; }
+        public DbSet<VendedorMODEL> Vendedores { get; set; }
     }
 }

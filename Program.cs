@@ -1,41 +1,36 @@
-using GestorNFEpagamentosXML.Models;
 using Microsoft.EntityFrameworkCore;
+using GestorNFEpagamentosXML.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuração do DbContext do Entity Framework Core
 var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<GestorNFEpagamentosXML.Db.DataContext>(options =>
     options.UseSqlServer(connectionString));
 
+// Adicionando o serviço de API Explorer Endpoints
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// Adicionando o serviço de Controllers
+builder.Services.AddControllers();
+
+// Configuração do Swagger
+builder.Services.ConfigureSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Verifica se o ambiente
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Redirecionamento HTTPS
 app.UseHttpsRedirection();
 
+// Mapeamento dos controladores
+app.MapControllers();
 
-//CONSULTA TOTAL
-app.MapGet("/evento", async (GestorNFEpagamentosXML.Db.DataContext context) =>
-    {
-        return await context.Eventos.ToListAsync();
-    })
-    .WithName("GetEvents")
-    .WithOpenApi();
-
-//CONSULTA DE VENDEDOR
-app.MapGet("/vendedor", async (GestorNFEpagamentosXML.Db.DataContext context) =>
-    {
-        return await context.Vendedores.ToListAsync();
-    })
-    .WithName("GetVendedores")
-    .WithOpenApi();
-
+// Inicia a aplicação
 app.Run();

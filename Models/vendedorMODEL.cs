@@ -3,7 +3,7 @@
 namespace GestorNFEpagamentosXML.Models
 {
     [Table("Vendedores")]
-    public class Vendedor
+    public class VendedorMODEL
     {
         public int Id { get; set; }
         public string Razao { get; set; }

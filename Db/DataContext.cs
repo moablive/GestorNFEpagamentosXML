@@ -9,5 +9,6 @@ namespace GestorNFEpagamentosXML.Db
 
         public DbSet<EventMODEL> Eventos { get; set; }
         public DbSet<VendedorMODEL> Vendedores { get; set; }
+        public DbSet<ComprovantesPagamentoMODEL> ComprovantesPagamento { get; set; }
     }
 }

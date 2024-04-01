@@ -8,22 +8,28 @@ using GestorNFEpagamentosXML.Cors;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração do DbContext do Entity Framework Core
+
+// Configuraï¿½ï¿½o do DbContext do Entity Framework Core
 var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<GestorNFEpagamentosXML.Db.DataContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Adicionando o serviço de API Explorer Endpoints
+
+// Adicionando o serviï¿½o de API Explorer Endpoints
 builder.Services.AddEndpointsApiExplorer();
 
-// Adicionando o serviço de Controllers
+
+// Adicionando o serviï¿½o de Controllers
 builder.Services.AddControllers();
 
-// Configuração do CORS usando a classe separada
+
+// Configuraï¿½ï¿½o do CORS usando a classe separada
 ConfigureCors.CorsConfiguration(builder.Services);
 
-// Configuração do Swagger
+
+// Configuraï¿½ï¿½o do Swagger
 builder.Services.ConfigureSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -37,11 +43,11 @@ if (app.Environment.IsDevelopment())
 // Redirecionamento HTTPS
 app.UseHttpsRedirection();
 
-// Uso do CORS com a política definida
+// Uso do CORS com a polï¿½tica definida
 app.UseCors("localhost");
 
 // Mapeamento dos controladores
 app.MapControllers();
 
-// Inicia a aplicação
+// Inicia a aplicaï¿½ï¿½o
 app.Run();

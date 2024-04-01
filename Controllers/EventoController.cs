@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿//System
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+
+//Project
 using GestorNFEpagamentosXML.Db;
 using GestorNFEpagamentosXML.Models;
 
@@ -35,6 +39,38 @@ namespace GestorNFEpagamentosXML.Controllers
             }
 
             return evento;
+        }
+
+        // POST: api/Evento/Pagar/5
+        [HttpPost("pagar/{id}")]
+        public async Task<IActionResult> MarcarComoPago(int id)
+        {
+            var evento = await _context.Eventos.FindAsync(id);
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            evento.status_pagamento = "Pago";
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // POST: api/Evento/NaoPagar/5
+        [HttpPost("naopagar/{id}")]
+        public async Task<IActionResult> MarcarComoNaoPago(int id)
+        {
+            var evento = await _context.Eventos.FindAsync(id);
+            if (evento == null)
+            {
+                return NotFound();
+            }
+
+            evento.status_pagamento = "NaoPago";
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace GestorNFEpagamentosXML.Controllers
             _context = context;
         }
 
-        //CADASTRAR
+        // CADASTRAR
         [HttpPost]
         public async Task<ActionResult<UserLoginMODEL>> CadastrarUsuario(UserLoginMODEL usuario)
         {

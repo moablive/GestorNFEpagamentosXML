@@ -1,14 +1,14 @@
 ﻿//System
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+using Dapper;
 
 //Project
 using GestorNFEpagamentosXML.Db;
 using GestorNFEpagamentosXML.Models;
 
-namespace GestorNFEpagamentosXML.Controllers
-{
+namespace GestorNFEpagamentosXML.Controllers;
+
     [ApiController]
     [Route("api/[controller]")]
     public class EventoController : ControllerBase
@@ -72,5 +72,41 @@ namespace GestorNFEpagamentosXML.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("VendedorPorCnpj/{cnpj}/{idEvento}")]
+        public async Task<ActionResult<string>> GetVendedorPorCnpj(string cnpj, int idEvento)
+        {
+            if (string.IsNullOrWhiteSpace(cnpj))
+            {
+                return BadRequest("O CNPJ fornecido é inválido.");
+            }
+
+            // Usando a conexão existente do Entity Framework Core
+            var connection = _context.Database.GetDbConnection();
+
+            await connection.OpenAsync();
+
+            var query = @"
+            SELECT v.NOME 
+            FROM dbo.Evento e
+            INNER JOIN dbo.Vendedores v ON e.CODIGO_VENDEDOR = v.CODIGO_VENDEDOR
+            WHERE e.CNPJ = @Cnpj AND e.ID = @IdEvento";
+
+            var vendedorNome = await connection.QueryFirstOrDefaultAsync<string>(
+                query, 
+                new { Cnpj = cnpj, IdEvento = idEvento }
+            );
+
+            await connection.CloseAsync();
+
+            if (string.IsNullOrEmpty(vendedorNome))
+            {
+                return NotFound("Vendedor não encontrado para o CNPJ e ID do evento fornecidos.");
+            }
+
+            return Ok(vendedorNome);
+        }
+
     }
-}
+
+

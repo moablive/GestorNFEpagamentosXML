@@ -9,7 +9,7 @@ using GestorNFEpagamentosXML.Cors;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Configura��o do DbContext do Entity Framework Core
+// Config do DbContext do Entity Framework Core
 var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<GestorNFEpagamentosXML.Db.DataContext>(options =>
     options.UseSqlServer(connectionString));

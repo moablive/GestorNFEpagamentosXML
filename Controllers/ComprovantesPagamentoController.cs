@@ -4,8 +4,8 @@ using GestorNFEpagamentosXML.Db;
 using GestorNFEpagamentosXML.Models;
 
 
-namespace GestorNFEpagamentosXML.Controllers
-{
+namespace GestorNFEpagamentosXML.Controllers;
+
     [ApiController]
     [Route("api/[controller]")]
     public class ComprovantesPagamentoController : ControllerBase
@@ -99,4 +99,4 @@ namespace GestorNFEpagamentosXML.Controllers
             return _context.ComprovantesPagamento.Any(e => e.ID == id);
         }
     }
-}
+

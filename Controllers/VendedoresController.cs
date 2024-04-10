@@ -6,29 +6,29 @@ using GestorNFEpagamentosXML.Db;
 using GestorNFEpagamentosXML.Models;
 
 
-namespace GestorNFEpagamentosXML.Controllers
-{
+namespace GestorNFEpagamentosXML.Controllers;
+
     [ApiController]
     [Route("api/[controller]")]
-    public class VendedorController : ControllerBase
+    public class VendedoresController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public VendedorController(DataContext context)
+        public VendedoresController(DataContext context)
         {
             _context = context;
         }
 
         // GET: api/Vendedor
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<VendedorMODEL>>> GetVendedores()
+        public async Task<ActionResult<IEnumerable<VendedoresMODEL>>> GetVendedores()
         {
             return await _context.Vendedores.ToListAsync();
         }
 
         // GET: api/Vendedor/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<VendedorMODEL>> GetVendedor(int id)
+        public async Task<ActionResult<VendedoresMODEL>> GetVendedor(int id)
         {
             var vendedor = await _context.Vendedores.FindAsync(id);
 
@@ -40,4 +40,3 @@ namespace GestorNFEpagamentosXML.Controllers
             return vendedor;
         }
     }
-}

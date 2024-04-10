@@ -6,7 +6,7 @@ namespace GestorNFEpagamentosXML.Models
     public class ComprovantesPagamentoMODEL
     {
         public int ID { get; set; }
-        public string NomeArquivo { get; set; }
-        public byte[] ArquivoPDF { get; set; }
+        public string? NomeArquivo { get; set; }
+        public byte[]? ArquivoPDF { get; set; }
     }
 }

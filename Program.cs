@@ -5,35 +5,28 @@ using Microsoft.EntityFrameworkCore;
 using GestorNFEpagamentosXML.Swagger;
 using GestorNFEpagamentosXML.Cors;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-
-// Config do DbContext do Entity Framework Core
+// Configuração do DbContext do Entity Framework Core para MariaDB
 var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<GestorNFEpagamentosXML.Db.DataContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-
-// Adicionando o servi�o de API Explorer Endpoints
+// Adicionando o serviço de API Explorer Endpoints
 builder.Services.AddEndpointsApiExplorer();
 
-
-// Adicionando o servi�o de Controllers
+// Adicionando o serviço de Controllers
 builder.Services.AddControllers();
 
-
-// Configura��o do CORS usando a classe separada
+// Configuração do CORS usando a classe separada
 ConfigureCors.CorsConfiguration(builder.Services);
 
-
-// Configura��o do Swagger
+// Configuração do Swagger
 builder.Services.ConfigureSwaggerGen();
-
 
 var app = builder.Build();
 
-// Verifica se o ambiente
+// Verifica se o ambiente é de desenvolvimento
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -43,11 +36,11 @@ if (app.Environment.IsDevelopment())
 // Redirecionamento HTTPS
 app.UseHttpsRedirection();
 
-// Uso do CORS com a pol�tica definida
+// Uso do CORS com a política definida
 app.UseCors("localhost");
 
 // Mapeamento dos controladores
 app.MapControllers();
 
-// Inicia a aplica��o
+// Inicia a aplicação
 app.Run();

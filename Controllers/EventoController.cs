@@ -88,8 +88,8 @@ namespace GestorNFEpagamentosXML.Controllers;
 
             var query = @"
             SELECT v.NOME 
-            FROM dbo.Evento e
-            INNER JOIN dbo.Vendedores v ON e.CODIGO_VENDEDOR = v.CODIGO_VENDEDOR
+            FROM Evento e
+            INNER JOIN Vendedores v ON e.CODIGO_VENDEDOR = v.CODIGO_VENDEDOR
             WHERE e.CNPJ = @Cnpj AND e.ID = @IdEvento";
 
             var vendedorNome = await connection.QueryFirstOrDefaultAsync<string>(
